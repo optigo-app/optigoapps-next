@@ -1,0 +1,109 @@
+.smr_brandsComponentsDiv {
+
+    margin-top: 3rem;
+
+    .smr_brandsCompoents {
+        font-size: 27px;
+        font-weight: 500 !important;
+        text-align: center;
+        text-transform: capitalize;
+        line-height: 2px;
+        margin: 0;
+        padding: 0;
+        padding-block: 2%;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        /* cghanges */
+    }
+
+    .brand_content_div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .brand_title {
+            display: flex;
+            flex-direction: column;
+
+            .brand_section_tag {
+                color: #d62f2f;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 2.5px;
+            }
+
+            .brand_section_title {
+                font-size: 2.5rem;
+                font-weight: 600;
+                color: #1a1a1a;
+                margin: 0;
+                line-height: 1.2;
+                flex: 1;
+            }
+        }
+
+        .brand_see_customers {
+            font-size: 20px;
+            font-weight: 600;
+
+            .brand_btn {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.55rem 1.5rem;
+                background-color: transparent;
+                border: 1px solid #460daf;
+                border-radius: 8px;
+                font-size: 1.1rem;
+                font-weight: 500;
+                color: #6c28d9;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+
+                &:hover {
+                    background-color: #460daf;
+                    border-color: #460daf;
+                    color: white;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(108, 40, 217, 0.15);
+                }
+            }
+        }
+    }
+
+    .brand-contents {
+        max-width: 80%;
+        margin-block: 1rem;
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .brand_title_1 {
+        margin-block: 2rem;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .smr_affilitionImg1 {
+        max-width: 300px;
+        object-fit: contain;
+    }
+
+    .brandsComponentClass {
+        margin-bottom: -10%;
+    }
+
+
+    @media (min-width: 320px) and (max-width: 768px) {
+        .smr_brandsCompoents {
+            margin-bottom: 20px !important;
+        }
+
+    }
+}
