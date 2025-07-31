@@ -11,24 +11,21 @@ const CompanyCulture = () => {
             </div>
 
             <div className="team-story__right">
-                <h2>Innovate. Transform. Lead – Be Part of Our Journey at OptigoApps</h2>
+                <h2>New Ideas. Fresh Minds. Real Growth – One Team.</h2>
                 <p>
-                    At <strong>OptigoApps</strong>, we're not just building software — we're redefining how the jewellery industry runs. We value diversity, encourage innovation, and foster a culture where every voice matters.
+                    At <strong>OptigoApps</strong>, we’re more than a workplace — we’re a team that grows, learns, and creates together.
                 </p>
                 <p>
-                    Our team is a close-knit community of thinkers, builders, and doers who believe in growth through collaboration. Whether it’s product innovation, client success, or internal excellence — we thrive together.
+                    Our culture is built on support, respect, and collaboration. We celebrate diverse ideas and believe that great software is made when people feel valued and inspired.
                 </p>
                 <p>
-                    Here, you'll work on cutting-edge ERP solutions that empower jewellers across the globe — from boutique retailers to international wholesalers. You’ll contribute to real-world impact while growing your skills in a dynamic, supportive environment.
+                    Here, you’ll work alongside passionate professionals on innovative ERP solutions that empower the jewellery industry — while being supported every step of the way by teammates who mentor and uplift each other.
                 </p>
                 <p>
-                    Join a workplace that invests in your future. At OptigoApps, mentorship, skill-building, and leadership opportunities aren’t just promises — they’re part of our DNA.
+                    Whether you’re starting your career or taking the next step, at OptigoApps, your growth and success are a team effort.
                 </p>
-                <p>
-                    Bring your expertise, curiosity, and drive — and let’s build the future of jewellery technology together.
-                    <br />
-                    <strong>Apply now and become a part of the OptigoApps family!</strong>
-                </p>
+                <br />
+                <strong>Join us and let’s build the future together. Apply now and become part of the OptigoApps family!</strong>
             </div>
         </section>
     );

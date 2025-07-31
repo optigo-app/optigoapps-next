@@ -18,7 +18,8 @@
         }
 
         h5 {
-            color: #c20000;
+            // color: #c20000;
+            color: var(--primary-color);
             font-weight: 600;
             letter-spacing: 1px;
             font-size: 0.9rem;
@@ -27,7 +28,7 @@
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
@@ -36,8 +37,9 @@
             display: inline-block;
             margin-top: 1rem;
             padding: 0.5rem 1rem;
-            color: #5f00ba;
-            border: 1px solid #5f00ba;
+            // color: #5f00ba;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
@@ -45,7 +47,8 @@
             cursor: pointer;
 
             &:hover {
-                background-color: #5f00ba;
+                // background-color: #5f00ba;
+                background: var(--primary-background);
                 color: #fff;
             }
         }
@@ -89,7 +92,8 @@
         padding: 2rem;
 
         .resource-card__type {
-            color: #c20000;
+            // color: #c20000;
+            color: var(--primary-color);
             font-weight: 600;
             text-transform: uppercase;
             font-size: 1rem;
@@ -101,7 +105,8 @@
             font-size: 1.4rem;
             font-weight: 400;
             margin-bottom: 0.7rem;
-            color: #5f00ba;
+            // color: #5f00ba;
+            color: var(--primary-color);
             line-height: 28px;
         }
 
@@ -131,7 +136,8 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #6c28d9;
+            // color: #6c28d9;
+            color: var(--primary-color);
             font-size: 1.05rem;
             font-weight: 500;
             text-decoration: none;
@@ -139,7 +145,8 @@
             transition: all 0.2s ease;
 
             &:hover {
-                color: #5b21b6;
+                // color: #5b21b6;
+                color: var(--primary-color-hover);
             }
         }
 

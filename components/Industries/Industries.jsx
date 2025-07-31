@@ -1,7 +1,11 @@
+'use client'
+
 import React from 'react'
 import './Industries.scss'
 import { ArrowRight, Factory, Truck, Warehouse } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
 
 const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, section,
     sectiion1Data, section1Title, section4Title, sectiion4Data, section4Title1, section6Title, section6Description, section2Title, section2Description, section2Data, section7Title, section7Data, section5Title, section5Tag, section5Description, section5Data, section8Title, section8Data }) => {
@@ -95,6 +99,7 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
         },
     ];
 
+    const handleNavigation = useHandleUrlNavigation();
 
     return (
         <div className="industries-infor-container">
@@ -103,7 +108,9 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
                 <div className="hero-content">
                     <h1>{mainTitle}</h1>
                     <p dangerouslySetInnerHTML={{ __html: mainDescription }} />
-                    <button className="primary-btn">{mainButtonContent}</button>
+                    <Link href={'#'} onClick={(e) => handleNavigation(e, '#')} className='primary-btn'>
+                        {mainButtonContent}
+                    </Link>
                 </div>
                 <div className="hero-image">
                     <img src={mainImg !== "" ? mainImg : "/static-banner-1.jpg"} width={700} height={700} alt="Jewelry Team" />

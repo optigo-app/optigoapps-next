@@ -11,13 +11,15 @@ const Section = ({ title, items, linkText, navigate, setActiveMenu }) => {
 
     return (
         <div>
-            <h4 className='text-md font-semibold text-red-600 uppercase mb-2 tracking-[3px] cursor-pointer'>
+            {/* <h4 className='text-md font-semibold text-red-600 uppercase mb-2 tracking-[3px] cursor-pointer'> */}
+            <h4 className='text-md font-semibold text-[var(--primary-color)] uppercase mb-2 tracking-[3px] cursor-pointer'>
                 {title}
             </h4>
 
             <ul className='space-y-3 text-gray-700 text-[15px]'>
                 {items.map((item, idx) => (
-                    <li key={idx} className='w-fit hover:text-red-600'>
+                    // <li key={idx} className='w-fit hover:text-red-600'>
+                    <li key={idx} className='w-fit hover:text-[var(--primary-color)]'>
                         <Link
                             href={item.url}
                             onClick={(e) => { handleNavigation(e, item.url); setActiveMenu(null) }}
@@ -29,7 +31,8 @@ const Section = ({ title, items, linkText, navigate, setActiveMenu }) => {
                 ))}
 
                 {linkText && (
-                    <li className='text-red-600 mt-2 font-medium text-lg'>
+                    // <li className='text-red-600 mt-2 font-medium text-lg'>
+                    <li className='text-[var(--primary-color)] mt-2 font-medium text-lg'>
                         <Link
                             href={linkText.url}
                             onClick={(e) => { handleNavigation(e, linkText.url); setActiveMenu(null) }}
@@ -40,15 +43,20 @@ const Section = ({ title, items, linkText, navigate, setActiveMenu }) => {
                     </li>
                 )}
             </ul>
-        </div >
+        </div>
     )
 };
 
 const PromoCard = ({ title, description, buttonText }) => (
-    <div className='bg-purple-200 p-6 h-full rounded-lg w-96 text-lg'>
+    <div className='bg-[#f3e9ff] p-6 h-full rounded-lg w-96 text-lg'>
         <h4 className='text-xl font-semibold mb-2'>{title}</h4>
         <p className='mb-4'>{description}</p>
-        <button className='bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800 cursor-pointer'>
+        <button
+            className='text-white px-4 py-2 rounded-lg cursor-pointer hover:opacity-90'
+            style={{
+                background: 'var(--primary-background)'
+            }}
+        >
             {buttonText}
         </button>
     </div>

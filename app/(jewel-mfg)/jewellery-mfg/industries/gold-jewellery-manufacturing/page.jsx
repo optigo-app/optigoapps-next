@@ -1,6 +1,7 @@
 import React from 'react'
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
+import { BarChart3, BrainCircuit, Calculator, Package, Timer, Wallet } from 'lucide-react';
 
 const page = () => {
 
@@ -34,7 +35,7 @@ const page = () => {
         {
             "id": 1,
             "title": "Product Development",
-            "icon": "🧠",
+            icon: <BrainCircuit color="#6C63FF" size={28} />,
             "points": [
                 "Track design flow from concept to final CAD",
                 "Auto-link designs with required gold karat, size, and style",
@@ -44,7 +45,7 @@ const page = () => {
         {
             "id": 2,
             "title": "Order & Reorder Management",
-            "icon": "📦",
+            icon: <Package color="#FF6F61" size={28} />,
             "points": [
                 "Bulk order creation for collections or same-style pieces",
                 "Smart reorder system for repeat clients and bestsellers",
@@ -54,7 +55,7 @@ const page = () => {
         {
             "id": 3,
             "title": "Real-Time Production Entry",
-            "icon": "⏱️",
+            icon: <Timer color="#00BFA6" size={28} />,
             "points": [
                 "Barcode-based job cards and weighing scale integration",
                 "Department-wise task updates with real-time visibility",
@@ -64,7 +65,7 @@ const page = () => {
         {
             "id": 4,
             "title": "Loss & Metal Recovery Management",
-            "icon": "🧮",
+            icon: <Calculator color="#FFB400" size={28} />,
             "points": [
                 "Track filing, polishing, and dust loss stage-wise",
                 "Auto calculation of gold recovery vs issued metal",
@@ -74,7 +75,7 @@ const page = () => {
         {
             "id": 5,
             "title": "WIP & Performance Dashboards",
-            "icon": "📊",
+            icon: <BarChart3 color="#3D5AFE" size={28} />,
             "points": [
                 "Know exactly where each batch or job stands",
                 "Daily production summary for teams and management",
@@ -84,7 +85,7 @@ const page = () => {
         {
             "id": 6,
             "title": "Integrated Billing & Accounting",
-            "icon": "💰",
+            icon: <Wallet color="#8E24AA" size={28} />,
             "points": [
                 "Single platform for production, invoicing, and financials",
                 "Direct job-to-invoice generation",

@@ -212,10 +212,10 @@
                             bottom: -2px;
                             border-radius: 4px;
                             background:
-                                linear-gradient(90deg, #7c3aed 50%, transparent 50%) top / 100% 2px no-repeat,
-                                linear-gradient(180deg, #7c3aed 50%, transparent 50%) right / 2px 100% no-repeat,
-                                linear-gradient(270deg, #7c3aed 50%, transparent 50%) bottom / 100% 2px no-repeat,
-                                linear-gradient(0deg, #7c3aed 50%, transparent 50%) left / 2px 100% no-repeat;
+                                linear-gradient(90deg, var(--primary-color) 50%, transparent 50%) top / 100% 2px no-repeat,
+                                linear-gradient(180deg, var(--primary-color) 50%, transparent 50%) right / 2px 100% no-repeat,
+                                linear-gradient(270deg, var(--primary-color) 50%, transparent 50%) bottom / 100% 2px no-repeat,
+                                linear-gradient(0deg, var(--primary-color) 50%, transparent 50%) left / 2px 100% no-repeat;
                             animation: traceBorder 2s linear infinite;
                         }
 
@@ -256,7 +256,7 @@
                                 conic-gradient(from 270deg at 50% 50%, transparent 0deg, black 0deg, black 90deg, transparent 90deg) bottom left;
                             mask-size: 50% 50%;
                             mask-repeat: no-repeat;
-                            background: #7c3aed;
+                            background: var(--primary-color);
                             animation: pathTrace 2s linear infinite;
                         }
 
@@ -294,7 +294,8 @@
                         margin-top: 1.5rem;
 
                         .check-banner-btn {
-                            background-color: #7c3aed;
+                            // background-color: #7c3aed;
+                            background: var(--primary-background);
                             color: #fff;
                             border-radius: 50px;
                             padding: 14px 25px;
@@ -306,7 +307,8 @@
                             animation: slideFadeIn 1.4s ease-out forwards;
 
                             &:hover {
-                                background-color: #6e2ddf;
+                                // background-color: #6e2ddf;
+                                opacity: 0.85;
                                 transform: scale(1.05);
                             }
                         }
@@ -464,7 +466,7 @@
                     font-size: 1rem;
                     font-weight: 600;
                     color: #fff;
-                    background-color: #d63737;
+                    background-color: var(--primary-color);
                     border: none;
                     border-radius: 6px;
                     cursor: pointer;
@@ -472,7 +474,7 @@
                     transition: background-color 0.3s ease;
 
                     &:hover {
-                        background-color: #f04444;
+                        background-color: var(--primary-color);
                     }
 
                     &:disabled {
@@ -573,8 +575,10 @@
             .job-action {
                 .apply-now {
                     background: #fff;
-                    border: 2px solid #7c3aed;
-                    color: #7c3aed;
+                    // border: 2px solid #7c3aed;
+                    border: 1px solid var(--primary-color);
+                    // color: #7c3aed;
+                    color: var(--primary-color);
                     padding: 15px 20px;
                     font-size: 0.95rem;
                     font-weight: 500;
@@ -590,7 +594,9 @@
                     }
 
                     &:hover {
-                        background: #7c3aed;
+                        // background: #7c3aed;
+                        background: var(--primary-background);
+                        border: none;
                         color: #fff;
 
                         .arrow {

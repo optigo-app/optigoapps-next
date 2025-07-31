@@ -15,7 +15,8 @@
 
         h2 {
             font-size: 2rem;
-            color: #cc0000;
+            // color: #cc0000;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
@@ -44,11 +45,11 @@
     }
 
     .orail {
-        border-left: 6px solid #7b61ff;
+        border-left: 6px solid var(--primary-color);
     }
 
     .optigo {
-        border-left: 6px solid #7b61ff;
+        border-left: 6px solid var(--primary-color);
     }
 
     @media (min-width: 768px) {
@@ -76,13 +77,15 @@
     &__title {
         font-size: 2rem;
         font-weight: 600;
-        color: #4e2a84;
+        // color: #4e2a84;
+        color: var(--primary-color);
     }
 
     &__view-all {
         background: none;
         border: none;
-        color: #4e2a84;
+        // color: #4e2a84;
+        color: var(--primary-color);
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -147,7 +150,8 @@
                 margin-bottom: 0.5rem;
 
                 &::marker {
-                    color: #4e2a84;
+                    // color: #4e2a84;
+                    color: var(--primary-color);
                 }
             }
         }
@@ -155,7 +159,8 @@
         &__link {
             margin-top: auto;
             font-weight: 500;
-            color: #4e2a84;
+            // color: #4e2a84;
+            color: var(--primary-color);
             display: inline-flex;
             align-items: center;
             gap: 4px;

@@ -374,7 +374,9 @@ const CareerForm = () => {
                     </div>
                 </label>
 
-                <button type="submit" className="submit-btn" onClick={handleSubmit}>Apply Now</button>
+                <div className='submit-div'>
+                    <button type="submit" className="submit-btn" onClick={handleSubmit}>Apply Now</button>
+                </div>
             </form>
         </div>
     );

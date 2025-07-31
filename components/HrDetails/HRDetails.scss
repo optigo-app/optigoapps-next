@@ -3,7 +3,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: #fff;
-    border: 1px solid #460daf;
+    // border: 1px solid #460daf;
+    border: 1px solid var(--primary-color);
     padding: 2rem 2%;
     color: #000;
     gap: 1.5rem;
@@ -42,7 +43,8 @@
 
             span {
                 font-size: 1.1rem;
-                color: #460daf;
+                // color: #460daf;
+                color: var(--primary-color);
                 font-weight: 700;
             }
 

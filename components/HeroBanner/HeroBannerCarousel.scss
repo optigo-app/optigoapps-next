@@ -4,7 +4,7 @@
 
     .hero-banner-carousel-div {
         width: 100%;
-        padding: 1rem 2rem;
+        padding: 1rem 0rem;
 
         .hero-banner-carousel-inner {
             position: relative;
@@ -34,7 +34,8 @@
                 }
 
                 .breadcrumb {
-                    color: #d62f2f;
+                    // color: #d62f2f;
+                    color: var(--primary-color);
                     text-transform: uppercase;
                     font-weight: 600;
                     letter-spacing: 1.5px;
@@ -59,7 +60,8 @@
                 }
 
                 .cta-button {
-                    background: #5b21b6;
+                    // background: #5b21b6;
+                    background: var(--primary-background);
                     color: #fff;
                     padding: 0.75rem 1.5rem;
                     font-size: 1rem;
@@ -70,7 +72,7 @@
                     transition: background 0.3s ease;
 
                     &:hover {
-                        background: #4c1d95;
+                        opacity: 0.85;
                     }
                 }
             }
@@ -179,11 +181,11 @@
     }
 
     .swiper-button-prev1 {
-        left: 20px;
+        left: -15px;
     }
 
     .swiper-button-next1 {
-        right: 20px;
+        right: -15px;
     }
 
     .swiper-button-prev1::after {

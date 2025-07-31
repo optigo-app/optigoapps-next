@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import "./globals.scss";
 import "./globals.css";
 import ScrollTop from "@/components/ScrollTop/ScrollTop";
 import Header from '@/components/Header/page'
@@ -6,6 +7,7 @@ import Footer from '@/components/Footer/Footer'
 import ShowContact from "@/components/ShowContact/ShowContact";
 import LoadingProvider from "@/context/LoadingCOntext";
 import PageLoadWatcher from "@/context/PageLoadWatcher";
+import PromotionalBanner from "@/components/PromotionalBanner/PromotionalBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,6 +68,7 @@ export default function RootLayout({ children }) {
         </LoadingProvider>
 
         {/* SCROLL TO TOP BUTTON */}
+        <PromotionalBanner />
         <ScrollTop />
       </body>
     </html>

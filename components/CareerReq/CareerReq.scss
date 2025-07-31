@@ -167,8 +167,9 @@
         text-align: center;
         padding-top: 2rem;
 
-        button {
-            background-color: #7c3aed;
+        a {
+            // background-color: #7c3aed;
+            background: var(--primary-background);
             color: white;
             border: none;
             padding: 0.75rem 2rem;
@@ -176,8 +177,12 @@
             font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background 0.2s ease;
             white-space: nowrap;
+
+            &:hover {
+                opacity: 0.85;
+            }
         }
     }
 

@@ -96,24 +96,37 @@ const page = () => {
                     >
                         {/* MENU ROW */}
                         <div className="menu-row">
-                            {menuItems.map((item, idx) => (
-                                <Link
-                                    href={item === "About Us" ? "/about-us" : item === "Partners" ? "/partners" : ""}
-                                    key={idx}
-                                    className={`menu-item ${activeMenu === item ? "active" : ""}`}
-                                    onClick={(e) => {
-                                        handleNavigation(e, item === "About Us" ? "/about-us" : item === "Partners" ? "/partners" : "");
-                                        if (item !== "About Us" && item !== "Partners") {
-                                            e.preventDefault();
-                                        }
-                                    }}
-                                    onMouseEnter={() => setActiveMenu(item)}
-                                >
-                                    {item}
-                                    <span className="menu-underline"></span>
-                                </Link>
+                            {menuItems.map((item, idx) => {
+                                const links = {
+                                    "Jewellery MFG": "/jewellery-mfg",
+                                    "Jewellery Wholesale": "/jewellery-wholesale",
+                                    "Jewellery Retail": "/jewellery-retail",
+                                    "Apps & Ecommerce": "/apps-ecommerce",
+                                    "Partners": "/partners",
+                                    "About Us": "/about-us",
+                                };
 
-                            ))}
+                                const href = links[item] || "#";
+
+                                return (
+                                    <Link
+                                        href={href}
+                                        key={idx}
+                                        className={`menu-item ${activeMenu === item ? "active" : ""}`}
+                                        onClick={(e) => {
+                                            handleNavigation(e, href);
+                                            setActiveMenu(null);
+                                            if (!links[item]) {
+                                                e.preventDefault(); // prevent click if no link
+                                            }
+                                        }}
+                                        onMouseEnter={() => setActiveMenu(item)}
+                                    >
+                                        {item}
+                                        <span className="menu-underline"></span>
+                                    </Link>
+                                );
+                            })}
                         </div>
 
                         {/* MEGA MENU OUTSIDE LOOP */}

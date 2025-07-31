@@ -5,10 +5,13 @@ import './CareerReq.scss';
 import Image from 'next/image';
 import jobData from '@/public/jobsOpenings';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
 
 const CareerReq = ({ jobSlug, jobTitle }) => {
 
     const navigate = useRouter();
+    const handleNavigation = useHandleUrlNavigation();
 
     const getJobsData = jobData?.find((job) => job.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') === jobSlug);
 
@@ -54,7 +57,7 @@ const CareerReq = ({ jobSlug, jobTitle }) => {
                     <div className="description" dangerouslySetInnerHTML={{ __html: getJobsData?.skills }} />
                 </div>
                 <div className="career-req-applyBtnDiv">
-                    <button onClick={() => navigate.push('/career-form')}>Apply Now</button>
+                    <Link href="/career-form" onClick={(e) => handleNavigation(e, '/career-form')}>Apply Now</Link>
                 </div>
             </div>
 

@@ -9,6 +9,9 @@ import jobData from '@/public/jobsOpenings';
 import { useRouter } from 'next/navigation';
 import CompanyCulture from '../CompanyCulture/CompanyCulture';
 import HRDetails from '../HrDetails/HRDetails';
+import Link from 'next/link';
+import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
+import EmployeeBenefits from '../EmployeeBenefits/EmployeeBenefits';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -20,6 +23,7 @@ const Careerinfo = () => {
     const [location, setLocation] = useState('');
     const [debouncedLocation, setDebouncedLocation] = useState('');
     const jobListRef = useRef(null);
+    const handleUrlNavigation = useHandleUrlNavigation();
 
     const router = useRouter();
     const departments = [];
@@ -202,10 +206,14 @@ const Careerinfo = () => {
                                                 </div>
                                             </div>
                                             <div className="job-action">
-                                                <button
+                                                <Link
                                                     className="apply-now"
-                                                    onClick={() =>
-                                                        router.push(
+                                                    href={`/career/${job.title
+                                                        .toLowerCase()
+                                                        .replace(/\s+/g, '-')
+                                                        .replace(/[^\w-]/g, '')}`}
+                                                    onClick={(e) =>
+                                                        handleUrlNavigation(e,
                                                             `/career/${job.title
                                                                 .toLowerCase()
                                                                 .replace(/\s+/g, '-')
@@ -214,7 +222,7 @@ const Careerinfo = () => {
                                                     }
                                                 >
                                                     Apply Now <span className="arrow"><ChevronRight /></span>
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     ))}
@@ -242,6 +250,8 @@ const Careerinfo = () => {
                 </div> */}
 
                 <CompanyCulture />
+
+                <EmployeeBenefits />
 
                 <HRDetails />
 

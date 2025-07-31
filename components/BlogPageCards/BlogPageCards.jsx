@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react';
 import './BlogPageCards.scss';
 import { useRouter } from 'next/navigation';
 import BlogsData from '@/public/BlogsData';
+import Link from 'next/link';
+import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
 
 const BlogPageCards = ({ blogs }) => {
     const router = useRouter();
+    const handleNavigation = useHandleUrlNavigation();
 
     const blogsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,11 +44,11 @@ const BlogPageCards = ({ blogs }) => {
             <div className="blogpagecards__grid">
                 {currentBlogs.length > 0 ? (
                     currentBlogs.map((item, index) => (
-                        <div
+                        <Link href={`/blog/${item.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
                             className="blogresource-card"
                             key={index}
-                            onClick={() =>
-                                router.push(`/blog/${item.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`)
+                            onClick={(e) =>
+                                handleNavigation(e, `/blog/${item.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`)
                             }
                         >
                             <div className="blogresource-card__imgDiv">
@@ -67,7 +70,7 @@ const BlogPageCards = ({ blogs }) => {
                                 )}
                                 <p className="blogresource-card__desc">{item.description}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 ) : (
                     <div className="no-blogs-found">
