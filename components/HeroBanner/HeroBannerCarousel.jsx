@@ -77,10 +77,10 @@ const HeroBannerCarousel = () => {
             <Swiper
                 modules={[Navigation, Pagination, EffectFade, Autoplay]}
                 loop={true}
-                autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                }}
+                // autoplay={{
+                //     delay: 3000,
+                //     disableOnInteraction: false,
+                // }}
                 effect="fade"
                 pagination={{ clickable: true }}
                 onSwiper={(swiper) => setSwiperInstance(swiper)}
@@ -108,7 +108,6 @@ const HeroBannerCarousel = () => {
                                         alt={slide.heading}
                                         height={200}
                                         width={200}
-                                        unoptimized
                                     />
                                 </div>
                             </div>
@@ -130,7 +129,6 @@ const HeroBannerCarousel = () => {
                     alt="Left arrow"
                     width={50}
                     height={50}
-                    unoptimized
                     draggable={false}
                     style={{ pointerEvents: "none", userSelect: "none" }}
                 />
@@ -148,7 +146,6 @@ const HeroBannerCarousel = () => {
                     alt="Right arrow"
                     width={50}
                     height={50}
-                    unoptimized
                     draggable={false}
                     style={{ pointerEvents: "none", userSelect: "none" }}
                 />

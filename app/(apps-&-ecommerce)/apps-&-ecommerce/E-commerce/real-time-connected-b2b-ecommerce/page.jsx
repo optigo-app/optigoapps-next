@@ -1,4 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+import { pages } from '@/utils/pages';
+
+export const metadata = generatePageMetadata(pages['/apps-&-ecommerce/E-commerce/real-time-connected-b2b-ecommerce']);
+
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import { ClipboardList, Globe, MessageCircle, ShieldCheck, Store, Wallet, Zap } from 'lucide-react';

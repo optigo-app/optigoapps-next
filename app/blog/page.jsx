@@ -1,10 +1,16 @@
-import BlogLandingPage from '@/components/BlogLandingPage/BlogLandingPage'
-import React from 'react'
+import BlogLandingPage from '@/components/BlogLandingPage/BlogLandingPage';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+import { pages } from '@/utils/pages';
+import React from 'react';
+
+export const metadata = generatePageMetadata(pages['/blog']);
 
 const page = () => {
     return (
-        <BlogLandingPage />
-    )
-}
+        <>
+            <BlogLandingPage />
+        </>
+    );
+};
 
 export default page

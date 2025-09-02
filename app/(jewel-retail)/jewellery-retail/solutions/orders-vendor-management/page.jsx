@@ -174,7 +174,7 @@ const page = () => {
                         </ul>
                     </div>
                     <div className="mission-image">
-                        <Image src="/mission.jpg" height={300} width={300} style={{ width: "350px" }} alt="Jewelry Workshop" unoptimized />
+                        <Image src="/mission.jpg" height={300} width={300} style={{ width: "350px" }} alt="Jewelry Workshop" />
                     </div>
                 </section>
             </div>

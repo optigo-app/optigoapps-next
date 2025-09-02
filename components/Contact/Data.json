@@ -1,0 +1,37 @@
+{
+    "countries": [
+      "United States",
+      "Canada",
+      "United Kingdom",
+      "Germany",
+      "France",
+      "Italy",
+      "Spain",
+      "India",
+      "China",
+      "Japan",
+      "Australia",
+      "Brazil",
+      "Mexico",
+      "South Africa",
+      "Russia"
+    ],
+    "industries": [
+      "Information Technology",
+      "Finance",
+      "Healthcare",
+      "Education",
+      "Retail",
+      "Manufacturing",
+      "Construction",
+      "Real Estate",
+      "Telecommunications",
+      "Energy",
+      "Automotive",
+      "Hospitality",
+      "Media & Entertainment",
+      "Logistics & Transportation",
+      "Agriculture"
+    ]
+  }
+  

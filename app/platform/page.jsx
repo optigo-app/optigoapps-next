@@ -1,14 +1,13 @@
-'use client';
-
 import React from 'react';
 import './page.scss';
-import { useRouter } from 'next/navigation';
 import HeroBanner from '@/components/HeroBanner/HeroBanner';
 import Image from 'next/image';
+import { pages } from '@/utils/pages';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+
+export const metadata = generatePageMetadata(pages["/platform"])
 
 const page = () => {
-
-    const navigate = useRouter();
 
     const section2Title = "Why Go Cloud?";
 
@@ -167,7 +166,6 @@ const page = () => {
         },
     ]
 
-
     return (
         <>
             <HeroBanner career="" heading="Cloud ERP for Jewellers - Work Smarter, Not Harder" subheading="" buttonData="" src='/cloud.jpg' />
@@ -183,7 +181,7 @@ const page = () => {
                         </ul>
                     </div>
                     <div className="mission-image">
-                        <Image src="/cloud-1.jpg" height={400} width={500} alt="Jewelry Workshop" unoptimized />
+                        <Image src="/cloud-1.jpg" height={400} width={500} alt="Jewelry Workshop" />
                     </div>
                 </section>
             </div>

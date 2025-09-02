@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import LoadingModal from '../LoadingModal';
 import './CareerForm.scss';
-import { useRouter } from 'next/navigation';
 import { countryCodes } from '@/public/CountryCodes';
 import jobData from '@/public/jobsOpenings';
+import { UploadMedia } from '@/api/initialApi/UploadMedia';
+import { CareerFormApi } from '@/api/CareerForm/CareerForm';
+import { EmailSending } from '@/api/EmailApi/EmailSending';
+import toast from 'react-hot-toast';
 
 const CareerForm = () => {
-    const navigate = useRouter();
     const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
     const ALLOWED_TYPES = [
         'application/msword',                 // .doc
@@ -19,11 +22,20 @@ const CareerForm = () => {
         'image/png'
     ];
 
+    const [isLocal, setIsLocal] = useState(false);
+
+    useEffect(() => {
+        setIsLocal(["localhost", "nzen"]?.includes(window.location.hostname));
+    }, []);
+
     const fileInputRef = useRef(null);
     const [resumeFile, setResumeFile] = useState(null);
     const [resumeError, setResumeError] = useState('');
+    const [maxLen, setMaxLen] = useState(10);
+    const [minLen, setMinLen] = useState(1);
 
     const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -32,6 +44,7 @@ const CareerForm = () => {
         gender: '',
         email: '',
         mobileCode: '',
+        mobileNoCode: '',
         mobile: '',
         years: '',
         joinDays: '',
@@ -46,6 +59,76 @@ const CareerForm = () => {
             ...prev,
             [name]: type === 'checkbox' ? checked : value
         }));
+
+        if (name === "mobileCode") {
+            const country = countryCodes.find((c) => c.code === value);
+            let phoneCode = '';
+            let min = 1;
+            let max = 15; // Default max length
+
+            if (country) {
+                phoneCode = country.phone;
+                if (Array.isArray(country.phoneLength)) {
+                    min = Math.min(...country.phoneLength);
+                    max = Math.max(...country.phoneLength);
+                } else if (country.phoneLength) {
+                    min = country.phoneLength;
+                    max = country.phoneLength;
+                } else if (country.min && country.max) {
+                    min = country.min;
+                    max = country.max;
+                }
+            }
+
+            setMinLen(min);
+            setMaxLen(max);
+
+            setFormData((prev) => ({
+                ...prev,
+                mobileCode: value,
+                mobileNoCode: phoneCode
+            }));
+        }
+
+        if (name === "mobile") {
+            // Only allow digits up to maxLen
+            if (value.replace(/\D/g, "").length <= maxLen) {
+                setFormData((prev) => ({ ...prev, mobile: value }));
+            }
+        }
+
+    };
+
+    // ✅ Utility: always wrap into array
+    const ensureArray = (val) => Array.isArray(val) ? val : [val];
+
+    // ✅ Helper to build email payload
+    const buildEmailData = (type, formData) => {
+        if (type === "hr") {
+            return {
+                fromEmail: "noreply@optigoapps.com",
+                toEmail: ensureArray("job@orail.in"), // HR email(s) 
+                subject: `New Job Application Received – ${formData.firstName} ${formData.lastName}`,
+                message: `Hi Team, \n A new job application has been submitted. Below are the candidate's details: \n Name: ${formData.firstName} ${formData.middleName} ${formData.lastName} \n Email: ${formData.email} \n Gender: ${formData.gender} \n Phone: ${formData.mobileCode} ${formData.mobile} \n Experience: ${formData.years} \n Available to Join: ${formData.joinDays} days \n Current Location: ${formData.currentLocation} \n Field / Department: ${formData.department} \n Resume: ${formData.fileName} \n Please review and proceed with the next steps. \n Best regards, \n https://optigoapps.com`,
+                mode: "career",
+                ufcc: isLocal ? "orail25" : "test74",
+                templateNo: "1"
+            };
+        }
+
+        if (type === "applicant") {
+            return {
+                fromEmail: "noreply@optigoapps.com",
+                toEmail: ensureArray([formData.email]), // applicant email always array
+                subject: `New Job Application Received – ${formData.firstName} ${formData.lastName}`,
+                message: `Hi ${formData.firstName}, \n Thank you for applying to the ${formData.department} position at OptigoApps. \n We’ve received your application and our hiring team is currently reviewing your details. If your profile matches our requirements, we’ll be in touch shortly. \n In the meantime, feel free to explore more about our company at ${"https://optigoapps.com"}. \n Here’s a quick summary of your submission: \n Name: ${formData.firstName} ${formData.middleName} ${formData.lastName} \n Email: ${formData.email} \n Experience: ${formData.years} \n Location: ${formData.currentLocation} \n Available to Join: ${formData.joinDays} days \n Department: ${formData.department} \n Thanks again for your interest in joining our team! \n Best regards, \n HR Team – OptigoApps. \n https://optigoapps.com \n hr@orail.in`,
+                mode: "career",
+                ufcc: isLocal ? "orail25" : "test74",
+                templateNo: "1"
+            };
+        }
+
+        throw new Error("Invalid email type");
     };
 
     const handleResumeUpload = (e) => {
@@ -84,8 +167,11 @@ const CareerForm = () => {
         e.stopPropagation();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (isLoading) return;
+
+        setIsLoading(true);
         const newErrors = {};
 
         const {
@@ -103,7 +189,7 @@ const CareerForm = () => {
             consent
         } = formData;
 
-        // Validate individual fields
+        // --- Validations ---
         if (!firstName?.trim()) newErrors.firstName = "Please enter your first name";
         if (!middleName?.trim()) newErrors.middleName = "Please enter your middle name";
         if (!lastName?.trim()) newErrors.lastName = "Please enter your last name";
@@ -115,59 +201,109 @@ const CareerForm = () => {
             newErrors.email = "Please enter a valid email address";
         }
 
-        if (!mobileCode) {
-            newErrors.mobileCode = "Please select your mobile code";
-        }
-
-        if (!mobile) {
+        console.log("TCL: handleSubmit -> mobileCode", mobileCode)
+        console.log("TCL: handleSubmit -> mobile", mobile)
+        if (!mobileCode && !mobile) {
+            newErrors.mobileCode = "Please select your country code";
             newErrors.mobile = "Please enter your mobile number";
-        } else if (!/^\d{10}$/.test(mobile)) {
-            newErrors.mobile = "Mobile number must be 10 digits";
-        }
-
-        if (!years?.trim()) {
-            newErrors.years = "Please enter your experience in years";
-        }
-
-        if (!joinDays || parseInt(joinDays) <= 0) {
-            newErrors.joinDays = "Please enter the number of days to join";
-        }
-
-        if (!currentLocation?.trim()) {
-            newErrors.currentLocation = "Please enter your current location";
-        }
-
-        if (!department?.trim()) {
-            newErrors.department = "Please select your department";
-        }
-
-        if ((consent !== true)) {
-            newErrors.consent = "Please accept the terms and conditions";
-        }
-
-        // Handle file validation
-        if (!resumeFile) {
-            setResumeError("Please upload your resume.");
         } else {
-            setResumeError(""); // clear if valid
+            if (mobileCode == "") {
+                newErrors.mobileCode = "Please select your country code";
+            }
+            if (mobile == "") {
+                newErrors.mobile = "Please enter your mobile number";
+            } else if (mobile.length < minLen || mobile.length > maxLen) {
+                newErrors.mobile =
+                    minLen === maxLen
+                        ? `Mobile number must be ${maxLen} digits`
+                        : `Mobile number must be between ${minLen} and ${maxLen} digits`;
+            }
         }
 
-        // If any errors exist
-        if (Object.keys(newErrors).length > 0 || !resumeFile) {
+        if (!years?.trim()) newErrors.years = "Please enter your experience in years or months";
+        if (!joinDays || parseInt(joinDays) <= 0) newErrors.joinDays = "Please enter the number of days to join";
+        if (!currentLocation?.trim()) newErrors.currentLocation = "Please enter your current location";
+        if (!department?.trim()) newErrors.department = "Please select your department";
+        if (consent !== true) newErrors.consent = "Please accept the terms and conditions";
+
+        if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
+            setIsLoading(false); // 🔑 reset here
             return;
         }
 
-        // All validations passed
-        setErrors({});
-        setResumeError("");
-        // console.log("Form submitted successfully", formData);
+        if (!resumeFile) {
+            setResumeError("Please upload your resume.");
+            setIsLoading(false); // 🔑 reset here
+            return;
+        }
+
+        try {
+            // --- Upload Resume ---
+            const resumeUpload = await UploadMedia({
+                attachments: [{ file: resumeFile }],
+                uniqueNo: Math.random().toString(36).substring(2, 10)
+            });
+
+            if (!resumeUpload?.success) {
+                setResumeError("Resume upload failed. Try again.");
+                setIsLoading(false); // 🔑 reset here
+                return;
+            }
+
+            const updatedFormData = {
+                ...formData,
+                fileName: resumeUpload?.files?.[0]?.fileName,
+                fileUrl: resumeUpload?.files?.[0]?.url,
+            };
+
+            // --- Submit Career Form ---
+            const careerForm = await CareerFormApi(updatedFormData);
+
+            if (careerForm?.Data?.rd?.[0]?.stat === 1) {
+                // --- Send Emails ---
+                const hrData = buildEmailData("hr", updatedFormData);
+                const applicantData = buildEmailData("applicant", updatedFormData);
+
+                // Run separately first for debugging
+                await EmailSending({ emailData: hrData });
+                await EmailSending({ emailData: applicantData });
+
+                toast.success("Form submitted successfully");
+
+                setFormData({
+                    firstName: '',
+                    middleName: '',
+                    lastName: '',
+                    gender: '',
+                    email: '',
+                    mobileCode: '',
+                    mobile: '',
+                    years: '',
+                    joinDays: '',
+                    currentLocation: '',
+                    department: '',
+                    consent: false,
+                    fileName: '',
+                    fileUrl: '',
+                });
+                setResumeFile(null);
+            } else {
+                toast.error(careerForm?.Data?.rd?.[0]?.stat_msg || "Error while submitting form");
+            }
+        } catch (error) {
+            console.error("Error during form submission process:", error);
+            toast.error("An unexpected error occurred.");
+        } finally {
+            setIsLoading(false); // ✅ always reset
+        }
     };
 
 
 
     return (
         <div className="apply-form">
+            <LoadingModal isOpen={isLoading} />
             {/* <h1 className="apply-form-heading">Apply for: {jobSlug.replace(/-/g, ' ')}</h1> */}
             {/* <span onClick={() => navigate.push('/careers')} className="back-link">← Back to all job openings</span> */}
 
@@ -190,7 +326,7 @@ const CareerForm = () => {
                     Upload resume
                 </label>
                 <p>
-                    This will auto-fill the fields below. 10MB max file size (Allowed file types are
+                    10MB max file size (Allowed file types are
                     <strong> .doc, .pdf, .docx, .rtf, .odt, .jpg, .png</strong>).
                 </p>
                 {resumeFile && (
@@ -263,34 +399,52 @@ const CareerForm = () => {
                     <div className="form-field mobile-field">
                         <label>Mobile Phone *</label>
                         <div className="mobile-inputs">
-                            <select
-                                id="mobileCode"
-                                name="mobileCode"
-                                value={formData.mobileCode}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select</option>
-                                {countryCodes.map((country) => (
-                                    <option key={country.code} value={`+${country.phone}`}>
-                                        {country.label} (+{country.phone})
-                                    </option>
-                                ))}
-                            </select>
+                            <div className='mobile-input-div'>
+                                <select
+                                    id="mobileCode"
+                                    name="mobileCode"
+                                    value={formData.mobileCode}
+                                    onChange={(e) => {
+                                        handleChange(e);
+                                        if (errors.mobileCode) {
+                                            setErrors(prev => ({ ...prev, mobileCode: "" }));
+                                        }
+                                    }}
+                                    onBlur={() => {
+                                        if (!formData.mobileCode) {
+                                            setErrors(prev => ({ ...prev, mobileCode: "Please select your country code" }));
+                                        }
+                                    }}
+                                    className={errors.mobileCode ? "error" : ""}
+                                >
+                                    <option value="">Select</option>
+                                    {countryCodes.map((country) => (
+                                        <option key={country.code} value={country.code}>
+                                            {country.label} (+{country.phone})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
 
                             <input
                                 type="tel"
                                 name="mobile"
                                 id="mobile"
                                 value={formData.mobile}
+                                maxLength={maxLen}
                                 onChange={handleChange}
                                 placeholder="Phone number"
                             />
                         </div>
+                        <p style={{ marginTop: "0.5rem", color: "#555" }}>
+                            Max {maxLen} digits allowed for selected country
+                        </p>
+                        {errors.mobileCode && <span className="error-text">{errors.mobileCode}</span>}
                         {errors.mobile && <p className="error-text">{errors.mobile}</p>}
                     </div>
 
                     <div className="form-field experience-field">
-                        <label>Experience</label>
+                        <label>Work Experience (e.g., 2 Years / 12 Months) *</label>
                         <div className="experience-inputs">
                             <input
                                 type="text"
@@ -375,7 +529,9 @@ const CareerForm = () => {
                 </label>
 
                 <div className='submit-div'>
-                    <button type="submit" className="submit-btn" onClick={handleSubmit}>Apply Now</button>
+                    <button type="submit" className="submit-btn" onClick={handleSubmit} disabled={isLoading}>
+                        {isLoading ? 'Submitting...' : 'Apply Now'}
+                    </button>
                 </div>
             </form>
         </div>

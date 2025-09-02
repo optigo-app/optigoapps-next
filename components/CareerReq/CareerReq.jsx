@@ -34,7 +34,6 @@ const CareerReq = ({ jobSlug, jobTitle }) => {
                         alt="career requirements"
                         height={380}
                         width={380}
-                        unoptimized
                     />
                 </div>
             </div>

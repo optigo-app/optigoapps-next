@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
 
 const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, section,
-    sectiion1Data, section1Title, section4Title, sectiion4Data, section4Title1, section6Title, section6Description, section2Title, section2Description, section2Data, section7Title, section7Data, section5Title, section5Tag, section5Description, section5Data, section8Title, section8Data }) => {
+    sectiion1Data, section1Title, section4Title, sectiion4Data, section4Title1, section6Title, section6Description, section2Title, section2Description, section2Data, section7Title, section7Data, section5Title, section5Tag, section5Description, section5Data, section8Title, section8Data, section7Datai, section7Titlei, section7Datai1, section7Titlei1 }) => {
 
     const benefits = [
         {
@@ -37,68 +37,6 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
         },
     ];
 
-    const services = [
-        {
-            icon: "🧭",
-            title: "Cloud readiness assessment and planning",
-            description:
-                "Provides strategic planning to align goals, assess readiness and minimize risk, ensuring a seamless cloud transition.",
-        },
-        {
-            icon: "🧩",
-            title: "Software implementation services",
-            description:
-                "Facilitates transparent software deployment using phased approaches and best practices to reduce risk and improve value.",
-        },
-        {
-            icon: "🔧",
-            title: "Managed services for smooth operations",
-            descriptmion:
-                "Boost team performance and ensure smoother operations by leveraging global service teams and automation.",
-        },
-        {
-            icon: "💡",
-            title: "Expert services to drive innovation",
-            description:
-                "Delivers pre-packaged solutions to accelerate tech adoption and support continuous digital improvement.",
-        },
-        {
-            icon: "📊",
-            title: "Comprehensive data services",
-            description:
-                "Simplifies data cleansing, mastering, migration, and integration with high quality, security, and compliance.",
-        },
-        {
-            icon: "👥",
-            title: "Organizational change management",
-            description:
-                "Offers training and strategies to navigate transitions and adopt new processes and technologies effectively.",
-        },
-    ];
-
-    const ERPbenefits = [
-        {
-            title: "Tailored for your industry",
-            description:
-                "Tackle industry-specific challenges with ERP that includes customized tools for nearly every sector – from manufacturing and distribution to healthcare.",
-        },
-        {
-            title: "Actionable insights in real time",
-            description:
-                "Harness unified data, advanced analytics, AI technology, and data lakes to gain faster, more actionable insights. Be ready to innovate and compete.",
-        },
-        {
-            title: "Leading-edge technology",
-            description:
-                "Adopt the latest tech with the Infor OS platform and our multi-tenant cloud solutions – offering scalability, AI, automation, seamless integration, and more.",
-        },
-        {
-            title: "Fast time to value",
-            description:
-                "Take advantage of preconfigured industry processes and workflows, role-based content, and continuous updates – no expensive customizations required.",
-        },
-    ];
-
     const handleNavigation = useHandleUrlNavigation();
 
     return (
@@ -113,7 +51,7 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
                     </Link>
                 </div>
                 <div className="hero-image">
-                    <img src={mainImg !== "" ? mainImg : "/static-banner-1.jpg"} width={700} height={700} alt="Jewelry Team" />
+                    <img src={mainImg !== "" ? mainImg : "/static-banner-1.jpg"} width={700} height={700} loading="eager" alt="Jewelry Team" />
                 </div>
             </section>
 
@@ -179,7 +117,7 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
                             </ul>
                         </div>
                         <div className="mission-image">
-                            <Image src="/mission.jpg" height={300} width={300} style={{ width: !section2Description ? "350px" : "430px" }} alt="Jewelry Workshop" unoptimized />
+                            <Image src="/mission.jpg" height={300} width={300} style={{ width: !section2Description ? "350px" : "430px" }} alt="Jewelry Workshop" />
                         </div>
                     </section>
                 </div>
@@ -264,8 +202,79 @@ const Industries = ({ mainTitle, mainDescription, mainButtonContent, mainImg, se
                         </div>
                     </div>
                 </section>
-            )
-            }
+            )}
+
+            {section?.includes("section7i") && (
+                <section
+                    className="benefits-bullets-iu"
+                    style={{
+                        backgroundImage: "url(/bg.webp)",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                    }}
+                >
+                    <div className="benefits-bullets-iu__container">
+                        <div className="benefits-bullets-iu__header">
+                            <h2 className="benefits-bullets-iu__title">
+                                {section7Titlei}
+                            </h2>
+                        </div>
+
+                        <div className="benefits-bullets-iu__grid">
+                            {section7Datai.map((item) => (
+                                <div key={item.id} className="bullet-card-iu">
+                                    <div className="bullet-card-iu__icon">{item.icon}</div>
+                                    <div className="bullet-card-iu__content">
+                                        <h3 className="bullet-card-iu__title">{item.title}</h3>
+                                        <ul className="bullet-card-iu__list">
+                                            {item.points.map((point, i) => (
+                                                <li key={i}>{point}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {section?.includes("section7i1") && (
+                <section
+                    className="benefits-bullets-iu1"
+                    style={{
+                        backgroundImage: "url(/bg.webp)",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                    }}
+                >
+                    <div className="benefits-bullets-iu1__container">
+                        <div className="benefits-bullets-iu1__header">
+                            <h2 className="benefits-bullets-iu1__title">
+                                {section7Titlei1}
+                            </h2>
+                        </div>
+
+                        <div className="benefits-bullets-iu1__grid">
+                            {section7Datai1.map((item) => (
+                                <div key={item.id} className="bullet-card-iu1">
+                                    <div className="bullet-card-iu1__icon">{item.icon}</div>
+                                    <div className="bullet-card-iu1__content">
+                                        <h3 className="bullet-card-iu1__title">{item.title}</h3>
+                                        <ul className="bullet-card-iu1__list">
+                                            {item.points.map((point, i) => (
+                                                <li key={i}>{point}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {
                 section?.includes("section4") &&

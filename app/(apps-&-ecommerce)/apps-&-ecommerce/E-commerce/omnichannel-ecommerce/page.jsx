@@ -1,4 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+import { pages } from '@/utils/pages';
+
+export const metadata = generatePageMetadata(pages['/apps-&-ecommerce/E-commerce/omnichannel-ecommerce']);
+
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import { BadgeDollarSign, ClipboardList, Clock, EyeOff, Globe, MessageCircle, RefreshCw, ShieldCheck, Store, Wallet, Zap } from 'lucide-react';

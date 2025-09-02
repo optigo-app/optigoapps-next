@@ -27,7 +27,6 @@ const HeroBanner = ({ career = 'CAREERS', heading = 'Your new team is waiting', 
                     alt="Infor Team"
                     height={400}
                     width={400}
-                    unoptimized
                 />
             </div>
         </div>

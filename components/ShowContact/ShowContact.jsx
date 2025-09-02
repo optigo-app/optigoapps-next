@@ -10,6 +10,7 @@ export default function ShowContact() {
         '/',
         '/career',
         '/career-form',
+        '/contactus',
         // Add more paths here if needed
     ];
 

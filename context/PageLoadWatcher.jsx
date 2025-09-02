@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { useLoading } from '@/context/LoadingCOntext';
+import { useLoading } from '@/context/LoadingContext';
 
 const PageLoadWatcher = () => {
 

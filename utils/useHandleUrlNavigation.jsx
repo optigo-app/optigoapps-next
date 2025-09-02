@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useLoading } from '@/context/LoadingCOntext';
+import { useLoading } from '@/context/LoadingContext';
 
 export const isSamePath = (a, b) =>
     a.replace(/\/+$/, '') === b.replace(/\/+$/, '');

@@ -49,7 +49,6 @@ const HeroSlider = () => {
                                 width={1920}
                                 height={500}
                                 style={{ width: '100%', height: '500px', objectFit: 'cover' }}
-                                unoptimized
                             />
                         </SwiperSlide>
                     ))}

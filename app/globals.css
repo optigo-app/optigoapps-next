@@ -14,6 +14,18 @@ body {
   margin: 0 auto;
 }
 
+
+@media (max-width: 1750px) {
+  .mainHomeSection {
+    max-width: 94%;
+    margin: 0 auto;
+  }
+}
+
+button[data-state="open"][aria-label="Close"] {
+  display: none !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="footer-main">
         {/* Left Side - Logo, Button, Social */}
         <div className="footer-brand">
-          <Image src="/logo.png" alt="logo" width={200} height={200} className="footer-logo" unoptimized />
+          <Image src="/logo.png" alt="logo" width={200} height={200} className="footer-logo" />
           {/* <button className="contact-button">Contact Us</button> */}
           <div className="social-icons">
             {socialIcons.map((item, index) => (
@@ -75,7 +75,10 @@ export default function Footer() {
         <p>© 2025 Optigo | Cloud ERP for Jewellery Industry All Rights Reserved, ORAIL SERVICES.</p>
         <div className="legal-links">
           <Link href="/about-us" onClick={(e) => handleNavigation(e, '/about-us')}>About</Link>
+          <Link href="/platform" onClick={(e) => handleNavigation(e, '/platform')}>Platform</Link>
+          <Link href="/blog" onClick={(e) => handleNavigation(e, '/blog')}>Blog</Link>
           <Link href="/career" onClick={(e) => handleNavigation(e, '/career')}>Career</Link>
+          <Link href="/contactus" onClick={(e) => handleNavigation(e, '/contactus')}>Contact</Link>
           <Link href="#">Terms of Service</Link>
           <Link href="#">Privacy Policy</Link>
           <Link href="/faqs" onClick={(e) => handleNavigation(e, '/faqs')}>Faqs</Link>

@@ -89,13 +89,19 @@
                     align-items: center;
                     gap: 10px;
 
-                    select {
-                        flex: 1;
+                    .mobile-input-div {
+
+                        flex-direction: column;
+
+                        select {
+                            flex: 1;
+                        }
+
+                        input {
+                            flex: 1;
+                        }
                     }
 
-                    input {
-                        flex: 1;
-                    }
                 }
             }
 
@@ -197,6 +203,7 @@
 
         .submit-div {
             text-align: start;
+
             .submit-btn {
                 padding: 12px 24px;
                 // background-color: #7c3aed;

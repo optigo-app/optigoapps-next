@@ -81,12 +81,12 @@ const contentMap = {
             { name: 'AI Based Stock Search', url: '/jewellery-mfg/solutions/ai-based-stock-search' },
         ],
         features: [
-            { name: 'Inventory Management', url: '/jewellery-mfg/features/prod-mfg' },
-            { name: 'Production process & Loss Management', url: '/feature/loss' },
-            { name: 'Orders & Repair Management', url: '/feature/crm' },
-            { name: 'Accounts & Payments', url: '/feature/vrm' },
-            { name: 'Sales & billing', url: '/feature/accounting' },
-            { name: 'Analytics & Dashboards', url: '/feature/ppc' },
+            { name: 'Inventory Management', url: '/jewellery-mfg/features/inventory-management' },
+            { name: 'Production process & Loss Management', url: '/jewellery-mfg/features/production-process-loss-management' },
+            { name: 'Orders & Repair Management', url: '/jewellery-mfg/features/orders-repair-management' },
+            { name: 'Accounts & Payments', url: '/jewellery-mfg/features/accounts-payments' },
+            { name: 'Sales & billing', url: '/jewellery-mfg/features/sales-billing' },
+            { name: 'Analytics & Dashboards', url: '/jewellery-mfg/features/analytics-dashboards' },
         ],
         promos: [
             {
@@ -101,13 +101,13 @@ const contentMap = {
             }
         ],
         links: {
-            industries: { label: 'All industries →', url: '/jewellery-mfg/industries/all-industries' },
-            solutions: { label: 'All solutions →', url: '/solutions' },
-            features: { label: 'All features →', url: '/features' },
+            // industries: { label: 'All industries →', url: '/jewellery-mfg/industries/all-industries' },
+            // solutions: { label: 'All solutions →', url: '/solutions' },
+            features: { label: 'All features →', url: '/jewellery-mfg/features/all-features' },
         }
     },
 
-    'Jewellery Wholesale': {
+    'Wholesale': {
         industries: [
             { name: 'Jewellery Distributors', url: '/jewellery-wholesale/industries/jewellery-distributors' },
             { name: 'Domestic/International Wholesalers', url: '/jewellery-wholesale/industries/domestic-international-wholesalers' },
@@ -122,12 +122,11 @@ const contentMap = {
             { name: 'Advance Analytical Reports', url: '/jewellery-wholesale/solutions/advance-analytical-reports' },
         ],
         features: [
-            { name: 'Inventory Management', url: '/feature/vrm' },
-            { name: 'Sales & Billing with scanning', url: '/feature/crm' },
-            { name: 'Approval Memo & Reconciliation', url: '/feature/dashboard' },
-            { name: 'Digital Catalog & analysis', url: '/feature/accounts' },
-            { name: 'Accounts & Payments', url: '/feature/repair' },
-            { name: 'Customer Relationship Management (CRM)', url: '/feature/repair' },
+            { name: 'Inventory Management', url: '/jewellery-wholesale/features/inventory-management' },
+            { name: 'Sales & Billing with scanning', url: '/jewellery-wholesale/features/sales-billing-scanning' },
+            { name: 'Approval Memo & Reconciliation', url: '/jewellery-wholesale/features/approval-memo-reconciliation' },
+            { name: 'Accounts & Payments', url: '/jewellery-wholesale/features/accounts-payments' },
+            { name: 'Customer Relationship Management (CRM)', url: '/jewellery-wholesale/features/customer-relationship-management-crm' },
         ],
         promos: [
             {
@@ -142,13 +141,13 @@ const contentMap = {
             }
         ],
         links: {
-            industries: { label: 'All industries →', url: '/jewellery-wholesale/industries/all-industries' },
-            solutions: { label: 'All solutions →', url: '/solutions' },
-            features: { label: 'All features →', url: '/features' },
+            // industries: { label: 'All industries →', url: '/jewellery-wholesale/industries/all-industries' },
+            // solutions: { label: 'All solutions →', url: '/solutions' },
+            features: { label: 'All features →', url: '/jewellery-wholesale/features/all-features' },
         }
     },
 
-    'Jewellery Retail': {
+    'Retail': {
         industries: [
             { name: 'Jewellery Retail Stores', url: '/jewellery-retail/industries/jewellery-retail-stores' },
             { name: 'Multi-Location Chains', url: '/jewellery-retail/industries/multi-location-chains' },
@@ -163,11 +162,11 @@ const contentMap = {
             { name: 'Schemes & Loyalty Programm', url: '/jewellery-retail/solutions/schemes-loyalty-programm' },
         ],
         features: [
-            { name: 'Inventory Management', url: '/feature/crm' },
-            { name: 'Customer Relationship Management (CRM)', url: '/feature/vrm' },
-            { name: 'Accounts & Payments', url: '/feature/inventory' },
-            { name: 'Sales & Billing with Scanning', url: '/feature/accounts' },
-            { name: 'Approval Memo & Reconciliation', url: '/feature/dashboard' },
+            { name: 'Inventory Management', url: '/jewellery-retail/features/inventory-management' },
+            { name: 'Customer Relationship Management (CRM)', url: '/jewellery-retail/features/customer-relationship-management-crm' },
+            { name: 'Accounts & Payments', url: '/jewellery-retail/features/accounts-payments' },
+            { name: 'Sales & Billing with Scanning', url: '/jewellery-retail/features/sales-billing-scanning' },
+            { name: 'Approval Memo & Reconciliation', url: '/jewellery-retail/features/approval-memo-reconciliation' },
         ],
         promos: [
             {
@@ -183,9 +182,9 @@ const contentMap = {
         ],
 
         links: {
-            industries: { label: 'All industries →', url: '/jewellery-retail/industries/all-industries' },
-            solutions: { label: 'All solutions →', url: '/solutions' },
-            features: { label: 'All features →', url: '/features' },
+            // industries: { label: 'All industries →', url: '/jewellery-retail/industries/all-industries' },
+            // solutions: { label: 'All solutions →', url: '/solutions' },
+            features: { label: 'All features →', url: '/jewellery-retail/features/all-features' },
         }
     },
 
@@ -226,6 +225,13 @@ const contentMap = {
         ],
         links: {}
     },
+    'About Us': {
+        industries: [
+            { name: 'Platform', url: '/platform' },
+            { name: 'Blog', url: '/blog' },
+            { name: 'career', url: '/career' },
+        ],
+    },
 };
 
 const MegaMenuCard = ({ title, setActiveMenu }) => {
@@ -237,7 +243,8 @@ const MegaMenuCard = ({ title, setActiveMenu }) => {
 
     return (
         <div className="absolute w-[110rem] left-[-5%] bg-[#f7f7f8] shadow-2xl p-12 flex justify-between rounded-md animate-in">
-            <Section title="Industries" items={data.industries || []} linkText={data.links?.industries} navigate={router} setActiveMenu={setActiveMenu} />
+            <Section title={title === 'About Us' ? 'Know More' : "Industries"} items={data.industries || []} linkText={data.links?.industries} navigate={router} setActiveMenu={setActiveMenu} />
+
             {data.solutions?.length > 0 && (
                 <Section
                     title={title === 'Apps & Ecommerce' ? 'E-Commerce' : 'Solutions'}

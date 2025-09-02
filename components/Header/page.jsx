@@ -4,11 +4,24 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import './page.scss'
 import MegaMenuCard from '../MegaMenuCard/MegaMenuCard';
-import { Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import SearchModel from '../Search/SearchModel';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import { Menu, X } from "lucide-react";
 import { useHandleUrlNavigation } from '@/utils/useHandleUrlNavigation';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import MegaMenuAccordion from '../MegaMenuCard/MegaMenuCardMobile';
 
 const page = () => {
 
@@ -16,31 +29,43 @@ const page = () => {
     const [showMenu, setShowMenu] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showModal1, setShowModal1] = useState(false);
+    const [logoWidth, setLogoWidth] = useState(150);
+    const [isMobile, setIsMobile] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [direction, setDirection] = useState('forward');
 
     const handleNavigation = useHandleUrlNavigation();
     const router = useRouter();
     const pathname = usePathname();
 
+    const [currentMenu, setCurrentMenu] = useState(null);
+
+    const handleBack = () => setCurrentMenu(null);
+
+
     const menuItems = [
         "Jewellery MFG",
-        "Jewellery Wholesale",
-        "Jewellery Retail",
+        "Wholesale",
+        "Retail",
         "Apps & Ecommerce",
         // "Service and Support",
         "Partners",
         "About Us",
     ];
 
+    // const handleContactClick = () => {
+    //     if (pathname === '/') {
+    //         const contactEl = document.getElementById('contact-section');
+    //         if (contactEl) {
+    //             contactEl.scrollIntoView({ behavior: 'smooth' });
+    //         }
+    //     } else {
+    //         // Navigate to homepage with hash
+    //         router.push('/#contact-section');
+    //     }
+    // };
     const handleContactClick = () => {
-        if (pathname === '/') {
-            const contactEl = document.getElementById('contact-section');
-            if (contactEl) {
-                contactEl.scrollIntoView({ behavior: 'smooth' });
-            }
-        } else {
-            // Navigate to homepage with hash
-            router.push('/#contact-section');
-        }
+        router.push('/contactus');
     };
 
     useEffect(() => {
@@ -54,89 +79,122 @@ const page = () => {
         }
     }, [activeMenu]);
 
+
+    const redirectMap = {
+        "Partners": "/partners",
+        // "About Us": "/about-us",
+    };
+
+    const redirectHeader = {
+        "Jewellery MFG": "/jewellery-mfg",
+        "Wholesale": "/jewellery-wholesale",
+        "Retail": "/jewellery-retail",
+        "Apps & Ecommerce": "/apps-ecommerce",
+    }
+
+    useEffect(() => {
+        const handleResize = () => {
+            let width;
+
+            if (window.innerWidth <= 1110) {
+                width = 150;
+            } else if (window.innerWidth >= 1600) {
+                width = 180;
+            } else {
+                width = 160;
+            }
+
+            setLogoWidth(width);
+            setIsMobile(window.innerWidth <= 1110);
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize();
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
     return (
         <header className='landing-header'>
             <div className='header-container'>
                 <div className="top-links-wrapper">
                     <div className="top-links-container">
-                        <div className="top-links">
+                        {/* <div className="top-links">
                             <Link href={'/platform'} onClick={(e) => handleNavigation(e, '/platform')} className="top-link">
-                                <Image src="/resources.svg" height={16} width={16} alt='resources' unoptimized />
+                                <Image src="/resources.svg" height={16} width={16} alt='resources' />
                                 Platform
                             </Link>
                             <Link href={'/blog'} onClick={(e) => handleNavigation(e, '/blog')} className="top-link">
-                                <Image src="/book.svg" height={20} width={20} alt='blog' unoptimized />
+                                <Image src="/book.svg" height={20} width={20} alt='blog' />
                                 Blog
                             </Link>
                             <Link href={'/career'} onClick={(e) => handleNavigation(e, '/career')} className="top-link">
-                                <Image src="/career.svg" height={22} width={22} alt='careers' unoptimized />
+                                <Image src="/career.svg" height={22} width={22} alt='careers' />
                                 Career
                             </Link>
-                            {/* <div onClick={(e) => handleRedirect(e, 'customer')} className="top-link">
-                                <Image src="/person.svg" height={20} width={20} alt='customer-center' unoptimized />
-                                Customer Center
-                            </div> */}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="main-header">
-                    <a href='/' onClick={(e) => handleNavigation(e, '/')} className="logo-container" >
-                        <Image
-                            src="/logo.png"
-                            alt="optigo-apps"
-                            width={300}
-                            height={30}
-                            unoptimized
-                        />
-                    </a>
-                    <nav
-                        className="navigation"
-                        onMouseEnter={() => setActiveMenu(activeMenu)}
-                        onMouseLeave={() => setActiveMenu(null)}
-                    >
-                        {/* MENU ROW */}
-                        <div className="menu-row">
-                            {menuItems.map((item, idx) => {
-                                const links = {
-                                    "Jewellery MFG": "/jewellery-mfg",
-                                    "Jewellery Wholesale": "/jewellery-wholesale",
-                                    "Jewellery Retail": "/jewellery-retail",
-                                    "Apps & Ecommerce": "/apps-ecommerce",
-                                    "Partners": "/partners",
-                                    "About Us": "/about-us",
-                                };
+                    <div className='main-header-sub'>
+                        <a href='/' onClick={(e) => handleNavigation(e, '/')} className="logo-container" >
+                            <Image
+                                src="/logo.png"
+                                alt="optigo-apps"
+                                width={logoWidth}
+                                height={30}
+                            />
+                        </a>
+                        <nav
+                            className="navigation"
+                            onMouseEnter={() => setActiveMenu(activeMenu)}
+                            onMouseLeave={() => setActiveMenu(null)}
+                        >
+                            {/* MENU ROW */}
+                            <div className="menu-row">
+                                {menuItems.map((item, idx) => {
+                                    const links = {
+                                        "Jewellery MFG": "/jewellery-mfg",
+                                        "Wholesale": "/jewellery-wholesale",
+                                        "Retail": "/jewellery-retail",
+                                        "Apps & Ecommerce": "/apps-ecommerce",
+                                        "Partners": "/partners",
+                                        "About Us": "/about-us",
+                                    };
 
-                                const href = links[item] || "#";
+                                    const href = links[item] || "#";
 
-                                return (
-                                    <Link
-                                        href={href}
-                                        key={idx}
-                                        className={`menu-item ${activeMenu === item ? "active" : ""}`}
-                                        onClick={(e) => {
-                                            handleNavigation(e, href);
-                                            setActiveMenu(null);
-                                            if (!links[item]) {
-                                                e.preventDefault(); // prevent click if no link
-                                            }
-                                        }}
-                                        onMouseEnter={() => setActiveMenu(item)}
-                                    >
-                                        {item}
-                                        <span className="menu-underline"></span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-
-                        {/* MEGA MENU OUTSIDE LOOP */}
-                        {showMenu && (
-                            <div className="mega-menu">
-                                <MegaMenuCard title={activeMenu} setActiveMenu={setActiveMenu} />
+                                    return (
+                                        <Link
+                                            href={href}
+                                            key={idx}
+                                            className={`menu-item ${activeMenu === item ? "active" : ""}`}
+                                            onClick={(e) => {
+                                                handleNavigation(e, href);
+                                                setActiveMenu(null);
+                                                if (!links[item]) {
+                                                    e.preventDefault(); // prevent click if no link
+                                                }
+                                            }}
+                                            onMouseEnter={() => setActiveMenu(item)}
+                                        >
+                                            {item}
+                                            <span className="menu-underline"></span>
+                                        </Link>
+                                    );
+                                })}
                             </div>
-                        )}
 
-                    </nav>
+                            {/* MEGA MENU OUTSIDE LOOP */}
+                            {showMenu && (
+                                <div className="mega-menu">
+                                    <MegaMenuCard title={activeMenu} setActiveMenu={setActiveMenu} />
+                                </div>
+                            )}
+
+                        </nav>
+                    </div>
                     <div className="header-actions">
                         {/* <button className="search-btn" onClick={() => setShowModal(true)}>
                             <Search className="search-icon" />
@@ -185,10 +243,101 @@ const page = () => {
                                             allowFullScreen
                                         ></iframe>
                                     </div>
+
                                 </div>
                             </div>
                         )}
                     </div>
+
+                    {isMobile && (
+                        <div className="header-menu">
+                            <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
+                                <SheetTrigger asChild>
+                                    <button className="flex items-center gap-1.5 px-5 py-3 text-white rounded-xl shadow hover:scale-105 transition-all" style={{ background: "var(--primary-background)" }}>
+                                        <span className="text-md font-medium tracking-wide">Menu</span>
+                                        <Menu size={18} className="text-purple-200" />
+                                    </button>
+                                </SheetTrigger>
+
+                                <SheetContent side="right" className="w-full max-w-[300px] sm:max-w-[400px] p-2 shadow-xl">
+                                    <VisuallyHidden>
+                                        <SheetTitle>Menu</SheetTitle>
+                                    </VisuallyHidden>
+
+                                    <SheetClose asChild>
+                                        <button
+                                            className="absolute right-5 top-5 text-gray-600 hover:text-gray-800 transition-colors z-20"
+                                            aria-label="Close"
+                                        >
+                                            <X size={28} />
+                                        </button>
+                                    </SheetClose>
+
+                                    <div className="relative w-full h-full overflow-hidden font-[poppins]">
+                                        {/* MAIN MENU */}
+                                        <div className="absolute inset-0 z-10 transition-all duration-300">
+                                            <div className="px-8 py-6 border-b text-xl font-semibold">Menu</div>
+                                            <ul className="px-4 py-5 space-y-4">
+                                                {menuItems.map((item, idx) => (
+                                                    <li
+                                                        key={idx}
+                                                        onClick={(e) => {
+                                                            if (redirectMap[item] && !redirectHeader[item]) {
+                                                                router.push(redirectMap[item]);
+                                                                setDrawerOpen(false);
+                                                                handleNavigation(e, redirectMap[item]);
+                                                            } else {
+                                                                setDirection("forward");
+                                                                setCurrentMenu(item);
+                                                            }
+                                                        }}
+                                                        className="group flex items-center justify-between px-4 py-3 rounded-lg bg-white shadow-sm hover:bg-indigo-50 cursor-pointer transition-all"
+                                                    >
+                                                        <span
+                                                            className="font-medium"
+                                                            style={{ color: 'var(--primary-color)' }}>{item} </span>
+
+                                                        {/* Only show arrow if it's a submenu, not a redirect link */}
+                                                        {!redirectMap[item] && (
+                                                            <ChevronRight size={24} color="var(--primary-color)" />
+                                                        )}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* SUBMENU PAGE */}
+                                        {currentMenu && (
+                                            <div
+                                                key={currentMenu + direction}
+                                                className={`
+                absolute inset-0 z-20 bg-white rounded-md transition-all duration-300 ease-in-out shadow-xl
+                ${direction === "forward" ? "animate-in slide-in-from-right" : "animate-out slide-out-to-right"}
+              `}
+                                            >
+                                                <div className="px-6 py-4 border-b flex items-center gap-2" onClick={() => {
+                                                    setDirection("backward");
+                                                    setTimeout(() => setCurrentMenu(null), 300);
+                                                }}>
+                                                    <button
+                                                        className="text-sm text-indigo-600 hover:underline flex items-center"
+                                                    >
+                                                        <ChevronLeft size={24} color='var(--primary-color)' />
+                                                    </button>
+                                                    <span className="text-lg font-semibold" style={{ color: 'var(--primary-color)' }}>{currentMenu}</span>
+                                                </div>
+
+                                                <div className="px-6 py-6 text-sm text-gray-600 leading-relaxed">
+                                                    <MegaMenuAccordion title={currentMenu} setActiveMenu={setCurrentMenu} setDrawerOpen={setDrawerOpen} />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </SheetContent>
+                            </Sheet>
+                        </div>
+                    )}
+
                     {showModal && <SearchModel
                         isOpen={showModal}
                         onClose={() => setShowModal(false)}

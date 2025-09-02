@@ -41,7 +41,6 @@ const BlogDetail = ({ blogSlug }) => {
                         alt={blog.title}
                         height={350}
                         width={350}
-                        unoptimized
                     />
                 </div>
             </div>
