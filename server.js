@@ -4,7 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
 const dev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 3000;

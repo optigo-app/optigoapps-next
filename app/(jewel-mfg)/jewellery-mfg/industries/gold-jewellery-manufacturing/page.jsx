@@ -2,6 +2,10 @@ import React from 'react'
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import { BarChart3, BrainCircuit, Calculator, Package, Timer, Wallet } from 'lucide-react';
+import { pages } from '@/utils/pages';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+
+export const metadata = generatePageMetadata(pages['/jewellery-mfg/industries/gold-jewellery-manufacturing']);
 
 const page = () => {
 

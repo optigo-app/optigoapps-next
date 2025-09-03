@@ -1,6 +1,10 @@
 import React from "react";
 import "./page.scss";
 import Industries from "@/components/Industries/Industries";
+import { generatePageMetadata } from "@/utils/HeadMeta";
+import { pages } from "@/utils/pages";
+
+export const metadata = generatePageMetadata(pages['/jewellery-retail/features/customer-relationship-management-crm']);
 
 const page = () => {
 

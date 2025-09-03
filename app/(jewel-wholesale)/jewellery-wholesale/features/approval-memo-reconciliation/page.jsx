@@ -1,7 +1,11 @@
 import React from "react";
 import "./page.scss";
 import Industries from "@/components/Industries/Industries";
-import { BadgeCheck, Banknote, ClipboardList, DatabaseZap, FileCheck, FileText, Repeat, ScanBarcode, ScanLine, ShieldCheck } from "lucide-react";
+import { ClipboardList, FileText } from "lucide-react";
+import { generatePageMetadata } from "@/utils/HeadMeta";
+import { pages } from "@/utils/pages";
+
+export const metadata = generatePageMetadata(pages['/jewellery-wholesale/features/approval-memo-reconciliation']);
 
 const page = () => {
 

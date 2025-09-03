@@ -1,8 +1,10 @@
 import React from "react";
 import "./page.scss";
-import { ArrowRight, Factory, Truck, Warehouse } from "lucide-react";
-import Image from "next/image";
 import Industries from "@/components/Industries/Industries";
+import { pages } from "@/utils/pages";
+import { generatePageMetadata } from "@/utils/HeadMeta";
+
+export const metadata = generatePageMetadata(pages['/jewellery-mfg/solutions/pd_design']);
 
 const page = () => {
 

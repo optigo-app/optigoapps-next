@@ -2,6 +2,11 @@ import React from "react";
 import "./page.scss";
 import Industries from "@/components/Industries/Industries";
 import { BadgeCheck, Banknote, ClipboardList, DatabaseZap, FileCheck, FileText, Repeat, ScanBarcode, ScanLine, ShieldCheck } from "lucide-react";
+import { pages } from '@/utils/pages';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+
+export const metadata = generatePageMetadata(pages['/jewellery-retail/features/sales-billing-scanning']);
+
 
 const page = () => {
 

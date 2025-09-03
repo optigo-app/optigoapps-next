@@ -1,8 +1,10 @@
-'use client';
-
 import React from 'react';
 import './page.scss';
 import HeroBanner from '@/components/HeroBanner/HeroBanner';
+import { pages } from '@/utils/pages';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+
+export const metadata = generatePageMetadata(pages['/jewellery-mfg/industries/all-industries']);
 
 const sections = [
     {

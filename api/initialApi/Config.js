@@ -13,8 +13,8 @@ export const UPLOADMEDIA =
 
 export const getHeaders = (init = {}) => {
     return {
-        Yearcode: "e3tuemVufX17ezIwfX17e29yYWlsMjV9fXt7b3JhaWwyNX19",
-        sv: "0",
+        Yearcode: isLocal ? "e3tuemVufX17ezIwfX17e29yYWlsMjV9fXt7b3JhaWwyNX19" : "e3tsaXZlLm9wdGlnb2FwcHMuY29tfX17ezIwfX17e3Rlc3Q3NH19e3t0ZXN0NzR9fQ==",
+        sv: isLocal ? '0' : '1',
         sp: "33",
         version: "v1"
     };

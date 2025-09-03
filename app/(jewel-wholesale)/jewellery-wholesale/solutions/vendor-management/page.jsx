@@ -2,6 +2,10 @@ import React from 'react'
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import { AlertTriangle, CalendarCheck, CheckCircle, FileSignature, Handshake, LineChart, PackageSearch, Timer } from 'lucide-react';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+import { pages } from '@/utils/pages';
+
+export const metadata = generatePageMetadata(pages['/jewellery-wholesale/solutions/vendor-management']);
 
 const page = () => {
 

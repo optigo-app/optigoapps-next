@@ -1,7 +1,10 @@
 import Industries from '@/components/Industries/Industries'
 import React from 'react'
 import './page.scss'
-import { AlertTriangle, Boxes, ClipboardList, FileBarChart2, LayoutDashboard, Wrench, PackageCheck, Palette, Truck, UserRound, Workflow } from 'lucide-react';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+import { pages } from '@/utils/pages';
+
+export const metadata = generatePageMetadata(pages['/jewellery-wholesale']);
 
 const page = () => {
     const mainTitle = "Jewellery Wholesale";

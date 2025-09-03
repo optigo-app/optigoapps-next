@@ -3,17 +3,19 @@
     margin-top: 3rem;
 
     .smr_brandsCompoents {
-        font-size: 27px;
+        font-size: clamp(1.5rem, 4vw, 1.7rem);
         font-weight: 500 !important;
         text-align: center;
         text-transform: capitalize;
-        line-height: 2px;
-        margin: 0;
-        padding: 0;
-        padding-block: 2%;
-        margin-top: 3rem;
-        margin-bottom: 2rem;
-        /* cghanges */
+        line-height: 1.3;
+        margin: 3rem 0 2rem;
+        padding: 2% 0;
+        letter-spacing: 0.5px;
+
+        @media (max-width: 768px) {
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+        }
     }
 
     .brand_content_div {
@@ -21,60 +23,86 @@
         justify-content: space-between;
         align-items: center;
 
+        @media (max-width: 700px) {
+            flex-direction: column;
+        }
+
         .brand_title {
             display: flex;
             flex-direction: column;
 
             .brand_section_tag {
-                // color: #d62f2f;
                 color: var(--primary-color);
                 text-transform: uppercase;
-                font-size: 0.9rem;
+                font-size: clamp(0.7rem, 1.5vw, 0.9375rem);
                 margin-bottom: 0.5rem;
-                font-size: 15px;
                 font-weight: 600;
                 letter-spacing: 2.5px;
+                line-height: 1.4;
             }
 
             .brand_section_title {
-                font-size: 2.2rem;
+                font-size: clamp(1.5rem, 4.5vw, 2.2rem);
                 font-weight: 600;
                 color: #1a1a1a;
                 margin: 0;
-                line-height: 1.2;
+                line-height: 1.3;
                 flex: 1;
+                letter-spacing: -0.5px;
+
+                @media (max-width: 768px) {
+                    margin-top: 0.5rem;
+                }
             }
         }
 
         .brand_see_customers {
-            font-size: 20px;
-            font-weight: 600;
+            margin-top: 1.5rem;
+            width: 100%;
+            text-align: center;
+
+            @media (min-width: 701px) {
+                margin-top: 0;
+                width: auto;
+                text-align: right;
+            }
 
             .brand_btn {
-                display: flex;
+                display: inline-flex;
                 align-items: center;
+                justify-content: center;
                 gap: 0.5rem;
-                padding: 0.55rem 1.5rem;
+                padding: 0.6rem 1.6rem;
                 background-color: transparent;
-                // border: 1px solid #460daf;
                 border: 1px solid var(--primary-color);
                 border-radius: 8px;
-                font-size: 1.05rem;
+                font-size: clamp(0.95rem, 1.5vw, 1.05rem);
                 font-weight: 500;
-                // color: #6c28d9;
                 color: var(--primary-color);
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
                 white-space: nowrap;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+
+                @media (min-width: 701px) {
+                    width: auto;
+                    margin: 0;
+                    padding: 0.65rem 1.8rem;
+                }
 
                 &:hover {
-                    // background-color: #460daf;
                     background: var(--primary-background);
-                    border: none;
-                    // border-color: #460daf;
+                    border-color: transparent;
                     color: white;
-                    transform: translateY(0px);
-                    box-shadow: 0 4px 12px rgba(108, 40, 217, 0.15);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(108, 40, 217, 0.2);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 6px rgba(108, 40, 217, 0.15);
                 }
             }
         }
@@ -84,8 +112,17 @@
         max-width: 80%;
         margin-block: 1rem;
 
+        @media (max-width: 700px) {
+            max-width: 100%;
+            text-align: justify;
+        }
+
         p {
             font-size: 16px;
+
+            @media (max-width: 700px) {
+                font-size: 14px;
+            }
         }
     }
 

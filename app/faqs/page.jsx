@@ -16,17 +16,19 @@ const Page = () => {
   const faqStructuredData =
     pageData.type === "faqs"
       ? {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: pageData.faqs.map((faq) => ({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: pageData.faqs.flatMap((category) =>
+          category.items.map((faq) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: {
               "@type": "Answer",
               text: faq.answer,
             },
-          })),
-        }
+          }))
+        ),
+      }
       : null;
 
   return (
@@ -37,7 +39,7 @@ const Page = () => {
           id="faq-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqStructuredData),
+            __html: JSON.stringify(faqStructuredData, null, 2),
           }}
         />
       )}

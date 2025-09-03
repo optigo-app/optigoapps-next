@@ -9,10 +9,24 @@ export function generatePageMetadata(pageData) {
     description: pageData.description || "",
     keywords: pageData.keywords || "",
     authors: [{ name: "Optigo Apps" }],
-    robots: { index: true, follow: true, nocache: true },
     alternates: { canonical: pageData.url || WEBSITE_URL },
     metadataBase: new URL(WEBSITE_URL),
     icons: { icon: "/favicon.ico" },
+    publisher: "Optigoapps",
+    // ✅ Robots meta tags
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title: `${pageData.title} | Optigo Apps`,
       description: pageData.description || "",
@@ -40,30 +54,6 @@ export function generatePageMetadata(pageData) {
     },
     additionalScripts: [], // Placeholder for structured data
   };
-
-  // JSON-LD for FAQ pages
-  if (pageData.type === "faqs" && Array.isArray(pageData.faqs)) {
-    const faqStructuredData = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: pageData.faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    };
-
-    baseMetadata.additionalScripts.push({
-      type: "application/ld+json",
-      json: faqStructuredData,
-    });
-  }
-
-  // Future: add structured data for products, blog posts, articles, etc.
-  // Example: JSON-LD for articles, breadcrumbs, products, events, etc.
 
   return baseMetadata;
 }

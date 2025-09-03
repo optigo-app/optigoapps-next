@@ -24,7 +24,7 @@ const HeroBanner = ({ career = 'CAREERS', heading = 'Your new team is waiting', 
             <div className="hero-banner-image">
                 <Image
                     src={src}
-                    alt="Infor Team"
+                    alt="optigo Team"
                     height={400}
                     width={400}
                 />

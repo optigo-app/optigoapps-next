@@ -11,6 +11,7 @@ import PromotionalBanner from "@/components/PromotionalBanner/PromotionalBanner"
 import { Toaster } from "react-hot-toast";
 import { toastConfig } from "@/toastConfig";
 import { WEBSITE_URL } from "@/env";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,28 +33,69 @@ export const viewport = {
 
 export const metadata = {
   title: "Optigoapps | Cloud ERP for Diamond and Jewellery",
-  description: "Optigoapps is a leading provider of Jewellery ERP and CRM solutions designed to empower jewellery businesses of all sizes. Our platform helps retailers, wholesalers, and manufacturers streamline operations, improve customer relationships, and maximize efficiency.",
-  metadataBase: new URL(`${WEBSITE_URL}`), // replace with real domain
+  description:
+    "Optigoapps offers Jewellery ERP & CRM solutions to help retailers, wholesalers & manufacturers streamline operations and boost efficiency.",
+
+  metadataBase: new URL(`${WEBSITE_URL}`), // replace with your real domain
+
+  alternates: {
+    canonical: `${WEBSITE_URL}`,
+  },
+
+  // ✅ Robots meta tags
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  // ✅ SEO keywords
+  keywords: [
+    "Jewellery ERP",
+    "Jewellery CRM",
+    "Diamond ERP",
+    "Jewellery Retail Software",
+    "Jewellery Wholesaler Software",
+    "Jewellery Manufacturer Software",
+    "Cloud ERP for Jewellery",
+    "Optigoapps ERP",
+  ],
+
+  // ✅ Publisher (organization or brand)
+  publisher: "Optigoapps",
+
   openGraph: {
     title: "Optigoapps | Cloud ERP for Diamond and Jewellery",
-    description: "Optigoapps is a leading provider of Jewellery ERP and CRM solutions designed to empower jewellery businesses of all sizes. Our platform helps retailers, wholesalers, and manufacturers streamline operations, improve customer relationships, and maximize efficiency.",
+    description:
+      "Optigoapps offers Jewellery ERP & CRM solutions to help retailers, wholesalers & manufacturers streamline operations and boost efficiency.",
     url: `${WEBSITE_URL}`,
     siteName: "Optigoapps",
     images: [
       {
-        url: "/logo.png", // relative is fine, it will resolve against metadataBase
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Optigoapps Logo",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Optigoapps | Cloud ERP for Diamond and Jewellery",
-    description: "Optigoapps is a leading provider of Jewellery ERP and CRM solutions designed to empower jewellery businesses of all sizes. Our platform helps retailers, wholesalers, and manufacturers streamline operations, improve customer relationships, and maximize efficiency.",
+    description:
+      "Optigoapps offers Jewellery ERP & CRM solutions to help retailers, wholesalers & manufacturers streamline operations and boost efficiency.",
     images: ["/og-image.jpg"],
   },
+
   locale: "en_IN",
   type: "website",
 };
@@ -73,6 +115,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
+        <BreadcrumbSchema />
         <Toaster {...toastConfig} />
         {/* PROTOTYPE LABEL */}
         {/* <div

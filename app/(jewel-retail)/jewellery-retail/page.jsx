@@ -1,6 +1,10 @@
 import Industries from '@/components/Industries/Industries'
 import React from 'react'
 import './page.scss'
+import { generatePageMetadata } from "@/utils/HeadMeta";
+import { pages } from "@/utils/pages";
+
+export const metadata = generatePageMetadata(pages['/jewellery-retail']);
 
 const page = () => {
     const mainTitle = "Jewellery Retail";

@@ -1,5 +1,9 @@
 import Industries from '@/components/Industries/Industries'
 import React from 'react'
+import { pages } from '@/utils/pages';
+import { generatePageMetadata } from '@/utils/HeadMeta';
+
+export const metadata = generatePageMetadata(pages['/jewellery-mfg/industries/diamond-jewellery-manufacturing']);
 
 const page = () => {
     const mainTitle = "Diamond Jewellery Manufacturing – Precision Made Possible with OptigoApps";

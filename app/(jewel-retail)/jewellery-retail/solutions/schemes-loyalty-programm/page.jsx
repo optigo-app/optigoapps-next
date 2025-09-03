@@ -2,6 +2,10 @@ import React from 'react'
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import Image from 'next/image';
+import { generatePageMetadata } from "@/utils/HeadMeta";
+import { pages } from "@/utils/pages";
+
+export const metadata = generatePageMetadata(pages['/jewellery-retail/solutions/schemes-loyalty-programm']);
 
 const page = () => {
 

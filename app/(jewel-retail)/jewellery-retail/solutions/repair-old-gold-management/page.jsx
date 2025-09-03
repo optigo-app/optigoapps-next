@@ -2,6 +2,10 @@ import React from 'react'
 import './page.scss';
 import Industries from '@/components/Industries/Industries'
 import Image from 'next/image';
+import { generatePageMetadata } from "@/utils/HeadMeta";
+import { pages } from "@/utils/pages";
+
+export const metadata = generatePageMetadata(pages['/jewellery-retail/solutions/repair-old-gold-management']);
 
 const page = () => {
 
@@ -171,7 +175,7 @@ const page = () => {
                         </ul>
                     </div>
                     <div className="mission-image">
-                        <Image src="/mission.jpg" height={300} width={300} style={{ width: "350px" }} alt="Jewelry Workshop" />
+                        <Image src="/mission.jpg" height={300} width={300} style={{ width: "350px" }} alt="Jewelry Workshop"  />
                     </div>
                 </section>
             </div>
